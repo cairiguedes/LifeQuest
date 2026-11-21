@@ -1,0 +1,7 @@
+// PWA: requer HTTPS ou localhost; não altera os dados locais do LifeQuest.
+(() => {
+  if (!('serviceWorker' in navigator) || !window.isSecureContext) return;
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js', { scope: './' }).catch(error => console.warn('PWA indisponível:', error));
+  });
+})();
