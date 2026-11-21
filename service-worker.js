@@ -1,5 +1,5 @@
-const CACHE = 'lifequest-v1.6.0';
-const ASSETS = ['./', './index.html', './css/style.css', './js/app.js', './js/features.js', './js/schedule.js', './js/pwa.js', './js/cloud.js', './js/cloud-config.js', './manifest.webmanifest', './assets/icons/icon-192.png', './assets/icons/icon-512.png', './assets/icons/maskable-512.png', './assets/icons/apple-touch-icon.png'];
+const CACHE = 'lifequest-v1.6.1-github';
+const ASSETS = ['./', './index.html', './style.css', './app.js', './features.js', './schedule.js', './pwa.js', './cloud.js', './cloud-config.js', './manifest.webmanifest', './icon-192.png', './icon-512.png', './maskable-512.png', './apple-touch-icon.png'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)));
   self.skipWaiting();
@@ -21,7 +21,7 @@ self.addEventListener('push', event => {
   let payload = {title:'LifeQuest',body:'Você tem uma missão agendada.'};
   try {payload = {...payload,...event.data.json()}} catch {}
   event.waitUntil(self.registration.showNotification(payload.title, {
-    body:payload.body,icon:'./assets/icons/icon-192.png',badge:'./assets/icons/icon-192.png',
+    body:payload.body,icon:'./icon-192.png',badge:'./icon-192.png',
     tag:payload.tag||'lifequest-reminder',data:{url:self.registration.scope}
   }));
 });

@@ -1,1 +1,668 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#111827"><title>LifeQuest — Sua evolução</title><meta name="description" content="LifeQuest: metas, XP, finanças e conquistas em um só lugar."><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="LifeQuest"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" type="image/png" sizes="192x192" href="assets/icons/icon-192.png"><link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png"><link rel="stylesheet" href="./css/style.css"></head><body><div class="shell"><aside class="sidebar"><div class="brand"><span class="logo">✦</span><div><strong>LifeQuest</strong><small>Sua evolução começa hoje</small></div></div><nav><button class="nav active" data-page="dashboard">◫ <span>Dashboard</span></button><button class="nav" data-page="goals">◎ <span>Minhas metas</span></button><button class="nav" data-page="history">▤ <span>Histórico</span></button><button class="nav" data-page="categories">▦ <span>Categorias</span></button><button class="nav" data-page="calendar">▦ <span>Calendário</span></button><button class="nav" data-page="finance">R$ <span>Finanças</span></button><button class="nav" data-page="achievements">★ <span>Conquistas</span></button><button class="nav" data-page="cloud">☁ <span>Nuvem e Push</span></button></nav><div class="sidefoot">LifeQuest V1.6 · Sincronização opcional</div></aside><main><header><div><p class="eyebrow">SEU ESPAÇO DE EVOLUÇÃO</p><h1 id="page-title">Visão geral</h1><p class="sub">Pequenas conquistas constroem grandes resultados.</p></div><div class="header-actions"><button id="theme-btn" class="ghost" title="Alternar tema">◐</button><button id="add-btn" class="primary">+ Nova meta</button></div></header><section id="dashboard" class="page"><div class="stats"><article class="panel stat"><span>XP total</span><strong id="xp-total">0</strong><small>Seu progresso acumulado</small></article><article class="panel stat"><span>Nível atual</span><strong id="level">1</strong><small id="level-label">Iniciante</small></article><article class="panel stat"><span>Concluídas hoje</span><strong id="done-today">0</strong><small>Missões realizadas</small></article><article class="panel stat"><span>Sequência diária</span><strong id="streak">0 dias</strong><small>Completando ao menos uma meta</small></article></div><article class="panel progress-panel"><div class="spread"><div><h2>Seu próximo nível</h2><p id="progress-caption" class="muted">0 / 500 XP</p></div><span class="pill" id="level-pill">Nível 1</span></div><div class="track"><div id="level-bar" class="fill"></div></div></article><div class="section-heading"><div><h2>Missões de hoje</h2><p class="muted">Conclua tarefas e ganhe experiência.</p></div><button class="text-btn" data-go="goals">Ver todas →</button></div><div id="today-list" class="goal-list"></div></section><section id="calendar" class="page hidden"><div class="section-heading"><div><h2>Calendário de atividades</h2><p class="muted">Planeje missões futuras e acompanhe suas conclusões.</p></div><div class="header-actions"><button id="cal-prev" class="ghost">‹</button><strong id="cal-month"></strong><button id="cal-next" class="ghost">›</button></div></div><div class="schedule-toolbar"><button class="primary" id="schedule-add">+ Agendar missão</button><button class="ghost" id="notify-enable">Ativar notificações</button><span class="muted" id="reminder-status">Lembretes exibidos com o aplicativo aberto.</span></div><div class="panel calendar-wrap"><div id="calendar-grid" class="calendar-grid"></div></div><article class="panel detail-panel"><h2 id="cal-selected-title">Atividades</h2><div id="cal-selected-list"></div><h2 class="schedule-subtitle">Missões agendadas</h2><div id="cal-scheduled-list"></div></article><div class="section-heading"><div><h2>Evolução de XP</h2><p class="muted">XP conquistado nos últimos 14 dias.</p></div></div><article class="panel chart-wrap"><div id="xp-chart" class="xp-chart"></div></article></section><section id="finance" class="page hidden"><div class="section-heading"><div><h2>Metas financeiras</h2><p class="muted">Valores reais registrados manualmente, sem integração bancária.</p></div><button id="finance-add" class="primary">+ Nova meta financeira</button></div><div class="stats finance-stats"><article class="panel stat"><span>Objetivos totais</span><strong id="finance-target">R$ 0</strong></article><article class="panel stat"><span>Saldo acumulado</span><strong id="finance-saved">R$ 0</strong></article></div><div id="finance-list" class="finance-list"></div></section><section id="achievements" class="page hidden"><div class="section-heading"><div><h2>Conquistas desbloqueáveis</h2><p class="muted">Medalhas por consistência, XP e metas alcançadas.</p></div></div><div id="achievements-list" class="achievement-grid"></div></section><section id="cloud" class="page hidden"><div class="section-heading"><div><h2>Nuvem e notificações</h2><p class="muted">Sincronize seus dados e receba lembretes no iPhone instalado.</p></div></div><article class="panel cloud-panel"><h2>Conta LifeQuest</h2><p id="cloud-status" class="muted">Configure o Supabase para ativar a nuvem.</p><form id="cloud-login-form" class="cloud-form"><label>E-mail<input type="email" name="email" autocomplete="email" required></label><label>Senha<input type="password" name="password" autocomplete="current-password" minlength="6" required></label><div class="header-actions"><button class="primary" type="submit">Entrar</button><button class="ghost" type="button" id="cloud-signup">Criar conta</button></div></form><div class="header-actions"><button class="ghost" id="cloud-sync" type="button">Sincronizar agora</button><button class="ghost" id="cloud-logout" type="button">Sair</button></div></article><article class="panel cloud-panel"><h2>Lembretes no iPhone</h2><p class="muted">Instale o LifeQuest na tela inicial e autorize notificações. O envio depende da função agendada no Supabase.</p><button id="cloud-push" class="primary">Ativar notificações push</button><button id="cloud-push-off" class="ghost">Desativar neste dispositivo</button><p id="push-status" class="muted"></p></article></section><section id="goals" class="page hidden"><div class="section-heading"><div><h2>Suas metas</h2><p class="muted">Organize objetivos diários, semanais ou únicos.</p></div><select id="goal-filter" aria-label="Filtrar metas"><option value="all">Todas</option><option value="daily">Diárias</option><option value="weekly">Semanais</option><option value="once">Únicas</option></select></div><div id="all-list" class="goal-list"></div></section><section id="history" class="page hidden"><div class="section-heading"><div><h2>Histórico de XP</h2><p class="muted">Suas conquistas registradas neste dispositivo.</p></div><div class="export-actions"><button id="export-csv" class="ghost">Exportar Excel (CSV)</button><button id="export-btn" class="ghost">Backup JSON</button></div></div><div id="history-list" class="goal-list"></div><p class="muted hint">O CSV pode ser aberto no Excel. O JSON preserva todos os dados para restaurar o aplicativo.</p><label class="import-label">Importar backup <input id="import-file" type="file" accept="application/json,.json" hidden></label></section><section id="categories" class="page hidden"><div class="section-heading"><div><h2>Gerenciar categorias</h2><p class="muted">Crie, renomeie, escolha ícones e cores ou exclua categorias.</p></div><button class="primary" id="new-category-btn">+ Nova categoria</button></div><div id="categories-list" class="category-grid"></div></section></main></div><dialog id="category-dialog"><form id="category-form"><div class="spread"><h2 id="category-dialog-title">Nova categoria</h2><button type="button" class="icon-btn" id="close-category" aria-label="Fechar">✕</button></div><label>Nome<input name="name" maxlength="40" required placeholder="Ex.: Corrida"></label><label>Ícone<select name="icon" id="category-icon"></select></label><label>Cor<input name="color" type="color" value="#6478dd"></label><div class="form-actions"><button type="button" class="ghost" id="cancel-category">Cancelar</button><button type="submit" class="primary">Salvar categoria</button></div></form></dialog><dialog id="goal-dialog"><form id="goal-form"><div class="spread"><h2 id="dialog-title">Nova meta</h2><button type="button" id="close-dialog" class="icon-btn" aria-label="Fechar">✕</button></div><label>Nome da meta<input name="title" maxlength="90" placeholder="Ex.: Estudar por 1 hora" required></label><label>Categoria<select name="category" id="category-select"></select></label><div class="category-add"><input id="new-category" type="text" maxlength="40" placeholder="Nova categoria (ex.: Corrida)" aria-label="Nome da nova categoria"><button type="button" class="ghost" id="add-category">+ Criar categoria</button></div><label>Frequência<select name="frequency"><option value="daily">Diária</option><option value="weekly">Semanal</option><option value="once">Uma vez</option></select></label><label>XP por conclusão<input name="xp" type="number" min="5" max="500" step="5" value="30" required></label><div class="form-actions"><button type="button" class="ghost" id="cancel-dialog">Cancelar</button><button class="primary" type="submit">Salvar meta</button></div></form></dialog><dialog id="finance-dialog"><form id="finance-form" class="stack-form"><div class="spread"><h2 id="finance-dialog-title">Nova meta financeira</h2><button type="button" class="icon-btn" data-close-finance>✕</button></div><label>Objetivo<input name="title" maxlength="90" required placeholder="Ex.: Reserva de emergência"></label><label>Valor-alvo (R$)<input name="target" type="number" min="0.01" max="1000000000" step="0.01" required></label><label>XP ao alcançar o objetivo<input name="reward" type="number" min="5" max="500" step="5" value="100" required></label><div class="form-actions"><button type="button" class="ghost" data-close-finance>Cancelar</button><button type="submit" class="primary">Salvar</button></div></form></dialog><dialog id="entry-dialog"><form id="entry-form" class="stack-form"><div class="spread"><h2>Registrar movimentação</h2><button type="button" class="icon-btn" data-close-entry>✕</button></div><p id="entry-goal-name" class="muted"></p><label>Tipo<select name="type"><option value="deposit">Depósito</option><option value="withdraw">Retirada</option></select></label><label>Valor (R$)<input name="amount" type="number" min="0.01" max="1000000000" step="0.01" required></label><label>Observação<input name="note" maxlength="120" placeholder="Opcional"></label><div class="form-actions"><button type="button" class="ghost" data-close-entry>Cancelar</button><button type="submit" class="primary">Registrar</button></div></form></dialog><dialog id="schedule-dialog"><form id="schedule-form" class="stack-form"><div class="spread"><h2 id="schedule-dialog-title">Agendar missão</h2><button type="button" class="icon-btn" id="schedule-close">✕</button></div><label>Missão<input name="title" maxlength="90" required placeholder="Ex.: Revisar matéria"></label><label>Categoria<select name="category" id="schedule-category"></select></label><label>Data<input name="date" type="date" required></label><label>Horário<input name="time" type="time" required></label><label>XP ao concluir<input name="xp" type="number" min="5" max="500" step="5" value="30" required></label><label class="inline-check"><input type="checkbox" name="remind" checked> Lembrar no horário marcado</label><p class="muted">Com o Push configurado, lembretes podem chegar mesmo com o aplicativo fechado. Sem Push, funcionam somente com o aplicativo aberto.</p><div class="form-actions"><button type="button" class="ghost" id="schedule-cancel">Cancelar</button><button class="primary" type="submit">Salvar agendamento</button></div></form></dialog><div id="toast" role="status" aria-live="polite"></div><script src="js/app.js" defer></script><script src="js/features.js" defer></script><script src="js/schedule.js" defer></script><script src="js/pwa.js" defer></script><script src="js/cloud-config.js" defer></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" defer></script><script src="js/cloud.js" defer></script></body></html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <meta content="#111827" name="theme-color"/>
+  <title>
+   LifeQuest — Sua evolução
+  </title>
+  <meta content="LifeQuest: metas, XP, finanças e conquistas em um só lugar." name="description"/>
+  <meta content="yes" name="apple-mobile-web-app-capable"/>
+  <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+  <meta content="LifeQuest" name="apple-mobile-web-app-title"/>
+  <link href="manifest.webmanifest" rel="manifest"/>
+  <link href="./icon-192.png" rel="icon" sizes="192x192" type="image/png"/>
+  <link href="./apple-touch-icon.png" rel="apple-touch-icon"/>
+  <link href="./style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div class="shell">
+   <aside class="sidebar">
+    <div class="brand">
+     <span class="logo">
+      ✦
+     </span>
+     <div>
+      <strong>
+       LifeQuest
+      </strong>
+      <small>
+       Sua evolução começa hoje
+      </small>
+     </div>
+    </div>
+    <nav>
+     <button class="nav active" data-page="dashboard">
+      ◫
+      <span>
+       Dashboard
+      </span>
+     </button>
+     <button class="nav" data-page="goals">
+      ◎
+      <span>
+       Minhas metas
+      </span>
+     </button>
+     <button class="nav" data-page="history">
+      ▤
+      <span>
+       Histórico
+      </span>
+     </button>
+     <button class="nav" data-page="categories">
+      ▦
+      <span>
+       Categorias
+      </span>
+     </button>
+     <button class="nav" data-page="calendar">
+      ▦
+      <span>
+       Calendário
+      </span>
+     </button>
+     <button class="nav" data-page="finance">
+      R$
+      <span>
+       Finanças
+      </span>
+     </button>
+     <button class="nav" data-page="achievements">
+      ★
+      <span>
+       Conquistas
+      </span>
+     </button>
+     <button class="nav" data-page="cloud">
+      ☁
+      <span>
+       Nuvem e Push
+      </span>
+     </button>
+    </nav>
+    <div class="sidefoot">
+     LifeQuest V1.6 · Sincronização opcional
+    </div>
+   </aside>
+   <main>
+    <header>
+     <div>
+      <p class="eyebrow">
+       SEU ESPAÇO DE EVOLUÇÃO
+      </p>
+      <h1 id="page-title">
+       Visão geral
+      </h1>
+      <p class="sub">
+       Pequenas conquistas constroem grandes resultados.
+      </p>
+     </div>
+     <div class="header-actions">
+      <button class="ghost" id="theme-btn" title="Alternar tema">
+       ◐
+      </button>
+      <button class="primary" id="add-btn">
+       + Nova meta
+      </button>
+     </div>
+    </header>
+    <section class="page" id="dashboard">
+     <div class="stats">
+      <article class="panel stat">
+       <span>
+        XP total
+       </span>
+       <strong id="xp-total">
+        0
+       </strong>
+       <small>
+        Seu progresso acumulado
+       </small>
+      </article>
+      <article class="panel stat">
+       <span>
+        Nível atual
+       </span>
+       <strong id="level">
+        1
+       </strong>
+       <small id="level-label">
+        Iniciante
+       </small>
+      </article>
+      <article class="panel stat">
+       <span>
+        Concluídas hoje
+       </span>
+       <strong id="done-today">
+        0
+       </strong>
+       <small>
+        Missões realizadas
+       </small>
+      </article>
+      <article class="panel stat">
+       <span>
+        Sequência diária
+       </span>
+       <strong id="streak">
+        0 dias
+       </strong>
+       <small>
+        Completando ao menos uma meta
+       </small>
+      </article>
+     </div>
+     <article class="panel progress-panel">
+      <div class="spread">
+       <div>
+        <h2>
+         Seu próximo nível
+        </h2>
+        <p class="muted" id="progress-caption">
+         0 / 500 XP
+        </p>
+       </div>
+       <span class="pill" id="level-pill">
+        Nível 1
+       </span>
+      </div>
+      <div class="track">
+       <div class="fill" id="level-bar">
+       </div>
+      </div>
+     </article>
+     <div class="section-heading">
+      <div>
+       <h2>
+        Missões de hoje
+       </h2>
+       <p class="muted">
+        Conclua tarefas e ganhe experiência.
+       </p>
+      </div>
+      <button class="text-btn" data-go="goals">
+       Ver todas →
+      </button>
+     </div>
+     <div class="goal-list" id="today-list">
+     </div>
+    </section>
+    <section class="page hidden" id="calendar">
+     <div class="section-heading">
+      <div>
+       <h2>
+        Calendário de atividades
+       </h2>
+       <p class="muted">
+        Planeje missões futuras e acompanhe suas conclusões.
+       </p>
+      </div>
+      <div class="header-actions">
+       <button class="ghost" id="cal-prev">
+        ‹
+       </button>
+       <strong id="cal-month">
+       </strong>
+       <button class="ghost" id="cal-next">
+        ›
+       </button>
+      </div>
+     </div>
+     <div class="schedule-toolbar">
+      <button class="primary" id="schedule-add">
+       + Agendar missão
+      </button>
+      <button class="ghost" id="notify-enable">
+       Ativar notificações
+      </button>
+      <span class="muted" id="reminder-status">
+       Lembretes exibidos com o aplicativo aberto.
+      </span>
+     </div>
+     <div class="panel calendar-wrap">
+      <div class="calendar-grid" id="calendar-grid">
+      </div>
+     </div>
+     <article class="panel detail-panel">
+      <h2 id="cal-selected-title">
+       Atividades
+      </h2>
+      <div id="cal-selected-list">
+      </div>
+      <h2 class="schedule-subtitle">
+       Missões agendadas
+      </h2>
+      <div id="cal-scheduled-list">
+      </div>
+     </article>
+     <div class="section-heading">
+      <div>
+       <h2>
+        Evolução de XP
+       </h2>
+       <p class="muted">
+        XP conquistado nos últimos 14 dias.
+       </p>
+      </div>
+     </div>
+     <article class="panel chart-wrap">
+      <div class="xp-chart" id="xp-chart">
+      </div>
+     </article>
+    </section>
+    <section class="page hidden" id="finance">
+     <div class="section-heading">
+      <div>
+       <h2>
+        Metas financeiras
+       </h2>
+       <p class="muted">
+        Valores reais registrados manualmente, sem integração bancária.
+       </p>
+      </div>
+      <button class="primary" id="finance-add">
+       + Nova meta financeira
+      </button>
+     </div>
+     <div class="stats finance-stats">
+      <article class="panel stat">
+       <span>
+        Objetivos totais
+       </span>
+       <strong id="finance-target">
+        R$ 0
+       </strong>
+      </article>
+      <article class="panel stat">
+       <span>
+        Saldo acumulado
+       </span>
+       <strong id="finance-saved">
+        R$ 0
+       </strong>
+      </article>
+     </div>
+     <div class="finance-list" id="finance-list">
+     </div>
+    </section>
+    <section class="page hidden" id="achievements">
+     <div class="section-heading">
+      <div>
+       <h2>
+        Conquistas desbloqueáveis
+       </h2>
+       <p class="muted">
+        Medalhas por consistência, XP e metas alcançadas.
+       </p>
+      </div>
+     </div>
+     <div class="achievement-grid" id="achievements-list">
+     </div>
+    </section>
+    <section class="page hidden" id="cloud">
+     <div class="section-heading">
+      <div>
+       <h2>
+        Nuvem e notificações
+       </h2>
+       <p class="muted">
+        Sincronize seus dados e receba lembretes no iPhone instalado.
+       </p>
+      </div>
+     </div>
+     <article class="panel cloud-panel">
+      <h2>
+       Conta LifeQuest
+      </h2>
+      <p class="muted" id="cloud-status">
+       Configure o Supabase para ativar a nuvem.
+      </p>
+      <form class="cloud-form" id="cloud-login-form">
+       <label>
+        E-mail
+        <input autocomplete="email" name="email" required="" type="email"/>
+       </label>
+       <label>
+        Senha
+        <input autocomplete="current-password" minlength="6" name="password" required="" type="password"/>
+       </label>
+       <div class="header-actions">
+        <button class="primary" type="submit">
+         Entrar
+        </button>
+        <button class="ghost" id="cloud-signup" type="button">
+         Criar conta
+        </button>
+       </div>
+      </form>
+      <div class="header-actions">
+       <button class="ghost" id="cloud-sync" type="button">
+        Sincronizar agora
+       </button>
+       <button class="ghost" id="cloud-logout" type="button">
+        Sair
+       </button>
+      </div>
+     </article>
+     <article class="panel cloud-panel">
+      <h2>
+       Lembretes no iPhone
+      </h2>
+      <p class="muted">
+       Instale o LifeQuest na tela inicial e autorize notificações. O envio depende da função agendada no Supabase.
+      </p>
+      <button class="primary" id="cloud-push">
+       Ativar notificações push
+      </button>
+      <button class="ghost" id="cloud-push-off">
+       Desativar neste dispositivo
+      </button>
+      <p class="muted" id="push-status">
+      </p>
+     </article>
+    </section>
+    <section class="page hidden" id="goals">
+     <div class="section-heading">
+      <div>
+       <h2>
+        Suas metas
+       </h2>
+       <p class="muted">
+        Organize objetivos diários, semanais ou únicos.
+       </p>
+      </div>
+      <select aria-label="Filtrar metas" id="goal-filter">
+       <option value="all">
+        Todas
+       </option>
+       <option value="daily">
+        Diárias
+       </option>
+       <option value="weekly">
+        Semanais
+       </option>
+       <option value="once">
+        Únicas
+       </option>
+      </select>
+     </div>
+     <div class="goal-list" id="all-list">
+     </div>
+    </section>
+    <section class="page hidden" id="history">
+     <div class="section-heading">
+      <div>
+       <h2>
+        Histórico de XP
+       </h2>
+       <p class="muted">
+        Suas conquistas registradas neste dispositivo.
+       </p>
+      </div>
+      <div class="export-actions">
+       <button class="ghost" id="export-csv">
+        Exportar Excel (CSV)
+       </button>
+       <button class="ghost" id="export-btn">
+        Backup JSON
+       </button>
+      </div>
+     </div>
+     <div class="goal-list" id="history-list">
+     </div>
+     <p class="muted hint">
+      O CSV pode ser aberto no Excel. O JSON preserva todos os dados para restaurar o aplicativo.
+     </p>
+     <label class="import-label">
+      Importar backup
+      <input accept="application/json,.json" hidden="" id="import-file" type="file"/>
+     </label>
+    </section>
+    <section class="page hidden" id="categories">
+     <div class="section-heading">
+      <div>
+       <h2>
+        Gerenciar categorias
+       </h2>
+       <p class="muted">
+        Crie, renomeie, escolha ícones e cores ou exclua categorias.
+       </p>
+      </div>
+      <button class="primary" id="new-category-btn">
+       + Nova categoria
+      </button>
+     </div>
+     <div class="category-grid" id="categories-list">
+     </div>
+    </section>
+   </main>
+  </div>
+  <dialog id="category-dialog">
+   <form id="category-form">
+    <div class="spread">
+     <h2 id="category-dialog-title">
+      Nova categoria
+     </h2>
+     <button aria-label="Fechar" class="icon-btn" id="close-category" type="button">
+      ✕
+     </button>
+    </div>
+    <label>
+     Nome
+     <input maxlength="40" name="name" placeholder="Ex.: Corrida" required=""/>
+    </label>
+    <label>
+     Ícone
+     <select id="category-icon" name="icon">
+     </select>
+    </label>
+    <label>
+     Cor
+     <input name="color" type="color" value="#6478dd"/>
+    </label>
+    <div class="form-actions">
+     <button class="ghost" id="cancel-category" type="button">
+      Cancelar
+     </button>
+     <button class="primary" type="submit">
+      Salvar categoria
+     </button>
+    </div>
+   </form>
+  </dialog>
+  <dialog id="goal-dialog">
+   <form id="goal-form">
+    <div class="spread">
+     <h2 id="dialog-title">
+      Nova meta
+     </h2>
+     <button aria-label="Fechar" class="icon-btn" id="close-dialog" type="button">
+      ✕
+     </button>
+    </div>
+    <label>
+     Nome da meta
+     <input maxlength="90" name="title" placeholder="Ex.: Estudar por 1 hora" required=""/>
+    </label>
+    <label>
+     Categoria
+     <select id="category-select" name="category">
+     </select>
+    </label>
+    <div class="category-add">
+     <input aria-label="Nome da nova categoria" id="new-category" maxlength="40" placeholder="Nova categoria (ex.: Corrida)" type="text"/>
+     <button class="ghost" id="add-category" type="button">
+      + Criar categoria
+     </button>
+    </div>
+    <label>
+     Frequência
+     <select name="frequency">
+      <option value="daily">
+       Diária
+      </option>
+      <option value="weekly">
+       Semanal
+      </option>
+      <option value="once">
+       Uma vez
+      </option>
+     </select>
+    </label>
+    <label>
+     XP por conclusão
+     <input max="500" min="5" name="xp" required="" step="5" type="number" value="30"/>
+    </label>
+    <div class="form-actions">
+     <button class="ghost" id="cancel-dialog" type="button">
+      Cancelar
+     </button>
+     <button class="primary" type="submit">
+      Salvar meta
+     </button>
+    </div>
+   </form>
+  </dialog>
+  <dialog id="finance-dialog">
+   <form class="stack-form" id="finance-form">
+    <div class="spread">
+     <h2 id="finance-dialog-title">
+      Nova meta financeira
+     </h2>
+     <button class="icon-btn" data-close-finance="" type="button">
+      ✕
+     </button>
+    </div>
+    <label>
+     Objetivo
+     <input maxlength="90" name="title" placeholder="Ex.: Reserva de emergência" required=""/>
+    </label>
+    <label>
+     Valor-alvo (R$)
+     <input max="1000000000" min="0.01" name="target" required="" step="0.01" type="number"/>
+    </label>
+    <label>
+     XP ao alcançar o objetivo
+     <input max="500" min="5" name="reward" required="" step="5" type="number" value="100"/>
+    </label>
+    <div class="form-actions">
+     <button class="ghost" data-close-finance="" type="button">
+      Cancelar
+     </button>
+     <button class="primary" type="submit">
+      Salvar
+     </button>
+    </div>
+   </form>
+  </dialog>
+  <dialog id="entry-dialog">
+   <form class="stack-form" id="entry-form">
+    <div class="spread">
+     <h2>
+      Registrar movimentação
+     </h2>
+     <button class="icon-btn" data-close-entry="" type="button">
+      ✕
+     </button>
+    </div>
+    <p class="muted" id="entry-goal-name">
+    </p>
+    <label>
+     Tipo
+     <select name="type">
+      <option value="deposit">
+       Depósito
+      </option>
+      <option value="withdraw">
+       Retirada
+      </option>
+     </select>
+    </label>
+    <label>
+     Valor (R$)
+     <input max="1000000000" min="0.01" name="amount" required="" step="0.01" type="number"/>
+    </label>
+    <label>
+     Observação
+     <input maxlength="120" name="note" placeholder="Opcional"/>
+    </label>
+    <div class="form-actions">
+     <button class="ghost" data-close-entry="" type="button">
+      Cancelar
+     </button>
+     <button class="primary" type="submit">
+      Registrar
+     </button>
+    </div>
+   </form>
+  </dialog>
+  <dialog id="schedule-dialog">
+   <form class="stack-form" id="schedule-form">
+    <div class="spread">
+     <h2 id="schedule-dialog-title">
+      Agendar missão
+     </h2>
+     <button class="icon-btn" id="schedule-close" type="button">
+      ✕
+     </button>
+    </div>
+    <label>
+     Missão
+     <input maxlength="90" name="title" placeholder="Ex.: Revisar matéria" required=""/>
+    </label>
+    <label>
+     Categoria
+     <select id="schedule-category" name="category">
+     </select>
+    </label>
+    <label>
+     Data
+     <input name="date" required="" type="date"/>
+    </label>
+    <label>
+     Horário
+     <input name="time" required="" type="time"/>
+    </label>
+    <label>
+     XP ao concluir
+     <input max="500" min="5" name="xp" required="" step="5" type="number" value="30"/>
+    </label>
+    <label class="inline-check">
+     <input checked="" name="remind" type="checkbox"/>
+     Lembrar no horário marcado
+    </label>
+    <p class="muted">
+     Com o Push configurado, lembretes podem chegar mesmo com o aplicativo fechado. Sem Push, funcionam somente com o aplicativo aberto.
+    </p>
+    <div class="form-actions">
+     <button class="ghost" id="schedule-cancel" type="button">
+      Cancelar
+     </button>
+     <button class="primary" type="submit">
+      Salvar agendamento
+     </button>
+    </div>
+   </form>
+  </dialog>
+  <div aria-live="polite" id="toast" role="status">
+  </div>
+  <script defer="" src="./app.js">
+  </script>
+  <script defer="" src="./features.js">
+  </script>
+  <script defer="" src="./schedule.js">
+  </script>
+  <script defer="" src="./pwa.js">
+  </script>
+  <script defer="" src="./cloud-config.js">
+  </script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js">
+  </script>
+  <script defer="" src="./cloud.js">
+  </script>
+ </body>
+</html>
+
