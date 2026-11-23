@@ -2,5 +2,5 @@
 window.LIFEQUEST_CLOUD = {
   url: 'https://rearnxyafdprdzxrhzyf.supabase.co',
   anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJlYXJueHlhZmRwcmR6eHJoenlmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTUyMTczMTEsImV4cCI6MjExMDc5MzMxMX0.kApTdNtjb0WgoEkdJBFAmHlusotHnQE_zqg6Rx_l_Dk',
-  vapidPublicKey: 'BB_-NeIbK8hF4dx_NU4PwRbgg3TS2wC_QkukTqOEnsnH7Id2hqAjWdtFrwCc_TM5E5jfoi9d9AMXEjGcGo3EJjg'
+  vapidPublicKey: 'BCCIiAT6_4RKlV8KUe90AVryB8imujozCuHQ5NDVeHPyvxhh7_ROOO5drL5uNx-wSHPWw1e3JJmCuvMSlB3fiSc'
 };
