@@ -12,10 +12,18 @@
 .schedule-toolbar{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:16px}.schedule-subtitle{margin:22px 0 8px}.schedule-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 0;border-bottom:1px solid var(--line)}.schedule-item strong{font-size:13px}.schedule-item small{display:block;margin-top:5px;color:var(--muted);font-size:11px}.schedule-done strong{text-decoration:line-through;color:var(--muted)}.schedule-actions{display:flex;align-items:center;gap:4px}.schedule-actions .ghost{padding:8px}.calendar-day.has-schedule{border-bottom:3px solid var(--accent)}.inline-check{display:flex!important;align-items:center;gap:9px}.inline-check input{width:auto!important}@media(max-width:650px){.schedule-item{align-items:flex-start;flex-direction:column}.schedule-toolbar .muted{width:100%}}
 
 .cloud-panel{margin-bottom:18px;padding:24px}.cloud-panel h2{margin-bottom:12px}.cloud-form{display:grid;gap:12px;max-width:430px;margin:16px 0}.cloud-form label{display:grid;gap:6px}.cloud-panel .header-actions{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}.cloud-panel button{margin-right:8px;margin-bottom:8px}
-@media (max-width: 768px) {
-  input,
-  select,
-  textarea {
-    font-size: 16px;
-  }
+
+
+/* LifeQuest V1.6.1: iOS Safari keeps form fields at 16px to avoid focus zoom. */
+@media (max-width: 900px) {
+  input:not([type="checkbox"]):not([type="radio"]),
+  select, textarea { font-size: 16px !important; min-height: 44px; max-width: 100%; }
+  dialog { max-width: calc(100vw - 24px); max-height: min(90dvh, 850px); overflow-y: auto; }
+  dialog form { max-width: 100%; }
+  .form-actions { flex-wrap: wrap; gap: 10px; }
+  .form-actions button { min-height: 44px; }
 }
+@supports (-webkit-touch-callout: none) {
+  input:not([type="checkbox"]):not([type="radio"]), select, textarea { font-size: 16px !important; }
+}
+#cloud-last-sync { display:block; margin-top: 8px; font-size: 12px; color: var(--muted); }
