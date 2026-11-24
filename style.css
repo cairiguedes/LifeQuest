@@ -1,3 +1,355 @@
+/* LifeQuest — Folha de estilos organizada | V1.6.1 */
+
+/* 01 — Variáveis e tema */
+
+:root {
+    font-family: Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;
+    color-scheme: light;
+    --bg: #f5f7fb;
+    --panel: #fff;
+    --text: #172033;
+    --muted: #7b8699;
+    --line: #e7ebf1;
+    --accent: #5a63df;
+    --accent-soft: #edf0ff;
+    --shadow: 0 8px 30px #192b5210;
+}
+
+body.dark {
+    color-scheme: dark;
+    --bg: #101722;
+    --panel: #1b2533;
+    --text: #f2f5fa;
+    --muted: #a2aec0;
+    --line: #324052;
+    --accent: #9a9fff;
+    --accent-soft: #30385c;
+    --shadow: none;
+}
+
+/* 02 — Estilos globais */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+}
+
+button,input,select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:focus-visible,input:focus-visible,select:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* 03 — Estrutura e menu lateral */
+
+.shell {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 246px;
+    background: var(--panel);
+    border-right: 1px solid var(--line);
+    padding: 29px 17px;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+
+.brand {
+    display: flex;
+    gap: 11px;
+    align-items: center;
+    padding: 0 9px 38px;
+}
+
+.brand strong {
+    display: block;
+    font-size: 20px;
+    letter-spacing: -.8px;
+}
+
+.brand small {
+    display: block;
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 4px;
+}
+
+.logo {
+    display: grid;
+    place-items: center;
+    background: var(--accent);
+    color: white;
+    border-radius: 13px;
+    width: 39px;
+    height: 39px;
+    font-size: 25px;
+}
+
+.sidebar nav {
+    display: grid;
+    gap: 8px;
+}
+
+.nav {
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    border-radius: 11px;
+    padding: 13px 16px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.nav span {
+    margin-left: 9px;
+}
+
+.nav.active,.nav:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
+}
+
+.sidefoot {
+    margin-top: auto;
+    color: var(--muted);
+    font-size: 11px;
+    padding: 12px;
+}
+
+/* 04 — Conteúdo principal e cabeçalho */
+
+main {
+    flex: 1;
+    max-width: 1300px;
+    padding: 39px 48px 80px;
+    margin: auto;
+    width: 100%;
+}
+
+header,.spread,.section-heading,.header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+header {
+    margin-bottom: 35px;
+}
+
+.eyebrow {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    font-weight: 800;
+    margin: 0 0 9px;
+}
+
+h1 {
+    font-size: 32px;
+    letter-spacing: -1.3px;
+    margin: 0 0 8px;
+}
+
+h2 {
+    font-size: 19px;
+    letter-spacing: -.5px;
+    margin: 0;
+}
+
+.sub,.muted {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.sub {
+    margin: 0;
+}
+
+/* 05 — Botões */
+
+.primary {
+    border: 0;
+    border-radius: 10px;
+    background: #5a63df;
+    color: #fff;
+    padding: 12px 18px;
+    font-weight: 700;
+}
+
+.primary:hover {
+    filter: brightness(1.09);
+}
+
+.ghost {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--panel);
+    color: var(--text);
+    padding: 11px 14px;
+}
+
+/* 06 — Dashboard e progresso */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 17px;
+}
+
+.panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+}
+
+.stat {
+    padding: 24px;
+    display: grid;
+    gap: 11px;
+}
+
+.stat span {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.stat strong {
+    font-size: 31px;
+    letter-spacing: -1px;
+}
+
+.stat small {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.progress-panel {
+    margin-top: 20px;
+    padding: 24px;
+}
+
+.progress-panel .muted {
+    margin-bottom: 0;
+}
+
+.pill {
+    border-radius: 20px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.track {
+    height: 10px;
+    border-radius: 20px;
+    background: var(--accent-soft);
+    overflow: hidden;
+    margin-top: 23px;
+}
+
+.fill {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg,#5a63df,#8ca3ff);
+    border-radius: 20px;
+    transition: width .3s;
+}
+
+/* 07 — Seções e metas */
+
+.section-heading {
+    margin: 36px 0 18px;
+}
+
+.section-heading p {
+    margin: 6px 0 0;
+}
+
+.text-btn {
+    border: 0;
+    background: transparent;
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.goal-list {
+    display: grid;
+    gap: 11px;
+}
+
+.goal {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    padding: 17px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.goal-main {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-width: 0;
+}
+
+.goal-check {
+    height: 23px;
+    width: 23px;
+    accent-color: #5a63df;
+    cursor: pointer;
+}
+
+.goal-title {
+    font-weight: 700;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+.goal.done .goal-title {
+    text-decoration: line-through;
+    color: var(--muted);
+}
+
+.goal-meta {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 5px;
+}
+
+.goal-right {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    flex-shrink: 0;
+}
+
+.xp {
+    font-size: 13px;
+    font-weight: 800;
     color: var(--accent);
 }
 
@@ -190,3 +542,553 @@ dialog::backdrop {
     }
 
     .header-actions {
+        gap: 5px;
+    }
+
+    .header-actions .primary {
+        font-size: 12px;
+        padding: 11px;
+    }
+
+    .stats {
+        gap: 10px;
+    }
+
+    .stat {
+        padding: 17px;
+    }
+
+    .stat strong {
+        font-size: 25px;
+    }
+
+    .stat small {
+        font-size: 10px;
+    }
+
+    .progress-panel {
+        padding: 18px;
+    }
+
+    .goal {
+        padding: 14px 12px;
+    }
+
+    .goal-right {
+        gap: 2px;
+    }
+
+    .goal-title {
+        font-size: 13px;
+    }
+
+    .goal-meta {
+        font-size: 10px;
+    }
+}
+
+/* V1.1: categorias e exportação */
+
+.category-add,.export-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.category-add input {
+    flex: 1;
+    min-width: 160px;
+}
+
+.category-add button {
+    white-space: nowrap;
+}
+
+.export-actions button {
+    white-space: nowrap;
+}
+
+/* V1.2: gerenciamento de categorias */
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(270px,1fr));
+    gap: 12px;
+}
+
+.category-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+}
+
+.category-symbol {
+    width: 43px;
+    height: 43px;
+    border: 1px solid;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+.category-details {
+    display: grid;
+    gap: 5px;
+    flex: 1;
+    min-width: 0;
+}
+
+.category-details strong {
+    overflow-wrap: anywhere;
+    font-size: 14px;
+}
+
+.category-details small {
+    color: var(--muted);
+}
+
+.category-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.category-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+}
+
+#category-form {
+    display: grid;
+    gap: 18px;
+}
+
+#category-form label {
+    display: grid;
+    gap: 7px;
+    font-size: 13px;
+    font-weight: 650;
+}
+
+#category-form input,#category-form select {
+    width: 100%;
+}
+
+#category-form input[type=color] {
+    height: 46px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.sidebar nav {
+    gap: 4px;
+}
+
+@media (max-width:650px) {
+    .nav {
+        padding: 5px 6px;
+    }
+
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* V1.3 — Calendário, finanças e conquistas */
+
+.calendar-wrap,.chart-wrap,.detail-panel {
+    padding: 22px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7,minmax(0,1fr));
+    gap: 7px;
+}
+
+.calendar-head {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 700;
+    padding: 8px 0;
+}
+
+.calendar-day {
+    height: 72px;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: var(--text);
+    border-radius: 10px;
+    text-align: left;
+    padding: 9px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.calendar-day small {
+    font-size: 10px;
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.calendar-day.selected {
+    outline: 2px solid var(--accent);
+}
+
+.calendar-day.today {
+    background: var(--accent-soft);
+}
+
+.detail-panel {
+    margin-top: 16px;
+}
+
+.detail-panel h2 {
+    margin-bottom: 14px;
+}
+
+.xp-chart {
+    height: 215px;
+    display: flex;
+    align-items: end;
+    gap: 8px;
+    overflow-x: auto;
+}
+
+.chart-col {
+    flex: 1;
+    min-width: 35px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 10px;
+    color: var(--muted);
+}
+
+.chart-bar {
+    background: var(--accent);
+    border-radius: 6px 6px 0 0;
+    width: 80%;
+    min-height: 2px;
+}
+
+.chart-col small {
+    font-size: 9px;
+}
+
+.finance-stats {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    margin-bottom: 20px;
+}
+
+.finance-list {
+    display: grid;
+    gap: 16px;
+}
+
+.financial-card {
+    padding: 22px;
+}
+
+.financial-card .track {
+    margin-top: 15px;
+}
+
+.finance-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+}
+
+.financial-card details {
+    border-top: 1px solid var(--line);
+    padding-top: 14px;
+}
+
+.financial-card summary {
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.entry-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 13px;
+}
+
+.entry-row small {
+    display: block;
+    color: var(--muted);
+    margin-top: 4px;
+}
+
+.achievement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 14px;
+}
+
+.achievement {
+    padding: 20px;
+    display: flex;
+    gap: 14px;
+    align-items: center;
+}
+
+.achievement h2 {
+    font-size: 16px;
+}
+
+.achievement p {
+    margin: 6px 0;
+}
+
+.achievement small {
+    font-size: 11px;
+    color: var(--accent);
+}
+
+.achievement.locked {
+    opacity: .65;
+}
+
+.medal {
+    font-size: 28px;
+}
+
+.stack-form {
+    display: grid;
+    gap: 16px;
+}
+
+.stack-form label {
+    display: grid;
+    gap: 7px;
+    font-size: 13px;
+    font-weight: 650;
+}
+
+.stack-form input {
+    width: 100%;
+}
+
+@media (max-width:650px) {
+    .sidebar {
+        height: 75px;
+        overflow-x: auto;
+    }
+
+    .sidebar nav {
+        min-width: 560px;
+    }
+
+    .nav {
+        font-size: 15px;
+    }
+
+    .nav span {
+        font-size: 9px;
+    }
+
+    .calendar-wrap,.chart-wrap {
+        padding: 10px;
+    }
+
+    .calendar-grid {
+        gap: 3px;
+    }
+
+    .calendar-day {
+        height: 57px;
+        padding: 5px;
+        font-size: 12px;
+    }
+
+    .calendar-day small {
+        font-size: 8px;
+    }
+
+    .finance-stats .stat strong {
+        font-size: 19px;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .chart-col {
+        min-width: 29px;
+    }
+}
+
+/* V1.4 — Agendamentos e lembretes */
+
+.schedule-toolbar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.schedule-subtitle {
+    margin: 22px 0 8px;
+}
+
+.schedule-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.schedule-item strong {
+    font-size: 13px;
+}
+
+.schedule-item small {
+    display: block;
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.schedule-done strong {
+    text-decoration: line-through;
+    color: var(--muted);
+}
+
+.schedule-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.schedule-actions .ghost {
+    padding: 8px;
+}
+
+.calendar-day.has-schedule {
+    border-bottom: 3px solid var(--accent);
+}
+
+.inline-check {
+    display: flex !important;
+    align-items: center;
+    gap: 9px;
+}
+
+.inline-check input {
+    width: auto !important;
+}
+
+@media (max-width:650px) {
+    .schedule-item {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .schedule-toolbar .muted {
+        width: 100%;
+    }
+}
+
+/* V1.6 — Nuvem e sincronização */
+
+.cloud-panel {
+    margin-bottom: 18px;
+    padding: 24px;
+}
+
+.cloud-panel h2 {
+    margin-bottom: 12px;
+}
+
+.cloud-form {
+    display: grid;
+    gap: 12px;
+    max-width: 430px;
+    margin: 16px 0;
+}
+
+.cloud-form label {
+    display: grid;
+    gap: 6px;
+}
+
+.cloud-panel .header-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 12px 0;
+}
+
+.cloud-panel button {
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+/* LifeQuest V1.6.1: iOS Safari keeps form fields at 16px to avoid focus zoom. */
+
+@media (max-width: 900px) {
+    input:not([type="checkbox"]):not([type="radio"]),
+  select, textarea {
+        font-size: 16px !important;
+        min-height: 44px;
+        max-width: 100%;
+    }
+
+    dialog {
+        max-width: calc(100vw - 24px);
+        max-height: min(90dvh, 850px);
+        overflow-y: auto;
+    }
+
+    dialog form {
+        max-width: 100%;
+    }
+
+    .form-actions {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .form-actions button {
+        min-height: 44px;
+    }
+}
+
+@supports (-webkit-touch-callout: none) {
+    input:not([type="checkbox"]):not([type="radio"]), select, textarea {
+        font-size: 16px !important;
+    }
+}
+
+/* V1.6.1 — Indicador de última sincronização */
+
+#cloud-last-sync {
+    display: block;
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--muted);
+}
